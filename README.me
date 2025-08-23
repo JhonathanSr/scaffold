@@ -1,73 +1,98 @@
-# 🧱 AJSoftware Scaffolding Plugin
+# 🛠️ AJSoftware Scaffold Plugin
 
-Plugin Gradle modular para generar proyectos y módulos con arquitectura limpia, ideal para Spring Boot 3.5. Incluye tareas para crear proyectos base, generar módulos funcionales y eliminar módulos obsoletos.
-
----
-
-## ⚙️ Prerrequisitos
-
-- Java 17 o superior
-- Gradle 8+
-- Groovy instalado (si compilas desde fuente)
-- Acceso a `~/.m2` para publicar localmente
+Generador modular para proyectos Spring Boot con enfoque en automatización, mantenibilidad y experiencia del desarrollador. Diseñado para crear estructuras limpias, reproducibles y listas para escalar.
 
 ---
 
-## 🚀 Instalación local
+## 🚀 Características principales
 
-Para compilar y publicar el plugin en tu repositorio Maven local:
+- 🔧 Generación de módulos con estructura parametrizada
+- 📦 Plantillas extensibles para `build.gradle`, controladores, servicios y pruebas
+- 🧪 Endpoint de status funcional (`/api/status`) para validación rápida
+- 🐳 Integración automática con Docker (`Dockerfile`, `.dockerignore`, `docker-compose.yml`)
+- 🧩 Soporte para Spring Boot Modulith con configuración lista para inyección
+- 📚 Documentación y onboarding automatizado para nuevos desarrolladores
+- 🛡️ Validación de errores y mensajes de ayuda integrados
+
+---
+
+## 📦 Instalación
 
 ```bash
-./gradlew publishToMavenLocal
+git clone https://github.com/SteverWiw/scaffold.git
+cd scaffold
+./gradlew build
 
-
-Esto lo instalará en:
-~/.m2/repository/com/ajsoftware/scaffold/scaffolding/1.0.0
-
-
-
-🛠️ Uso en otros proyectos
-En el proyecto donde quieras usar el plugin, agrega lo siguiente:
-build.gradle
-buildscript {
-    repositories {
-        mavenLocal()
-    }
-    dependencies {
-        classpath 'com.ajsoftware.scaffold:scaffolding:1.0.0'
-    }
-}
-
-apply plugin: 'com.ajsoftware.scaffold'
+🧪 Validación rápida
+./gradlew bootRun
+curl http://localhost:8080/api/status
 
 
 
-📦 Tareas disponibles
-|  |  |  |
-| createProject | cp |  |
-| generateModule | gm |  |
-| deleteModule | dm | settings.gradlebuild.gradle |
+🧰 Uso del plugin
+Crear un nuevo módulo
+./gradlew generateModule \
+  --moduleName=inventory \
+  --package=com.ajsoftware.inventory \
+  --withDocker=true \
+  --withTests=true
+
+
+Esto generará:
+- inventory con estructura limpia
+- build.gradle inyectado con dependencias necesarias
+- Controlador REST base (InventoryController)
+- Pruebas unitarias y de integración
+- Configuración Docker lista para usar
+
+🧠 Filosofía del proyecto
+Este scaffolder nace de la necesidad de crear proyectos que:
+- Sean fáciles de entender y extender
+- Tengan una estructura reproducible para cualquier equipo
+- Ofrezcan una experiencia de onboarding clara y profesional
+- Permitan escalar sin sacrificar mantenibilidad
+Cada módulo generado está diseñado para ser plug-and-play, con hooks listos para configuración, logging y pruebas.
+
+🧩 Extensión del plugin
+Puedes personalizar las plantillas ubicadas en:
+src/main/resources/templates/
+
+
+Variables disponibles:
+- {{moduleName}}
+- {{package}}
+- {{withDocker}}
+- {{withTests}}
+También puedes agregar nuevas tareas Gradle en:
+src/main/kotlin/com/ajsoftware/scaffold/tasks/
 
 
 
-🧪 Ejemplos de uso
-gradle cp --name=inventory --package=com.aj.inventory --javaVersion=21 --reactive=true
-gradle gm --name=inventory
-gradle dm --name=inventory
-
-
-Cada tarea imprime su propio ejemplo de uso antes de ejecutarse.
-
-🧠 Estructura modular interna
-El plugin está organizado en subpaquetes:
-com.ajsoftware.scaffold
-├── project      → createProject
-├── module       → generateModule
-└── delete       → deleteModule
+🐳 Docker integrado
+Cada módulo puede incluir automáticamente:
+- Dockerfile optimizado para Spring Boot
+- .dockerignore para evitar archivos innecesarios
+- docker-compose.yml con configuración base
+docker-compose up --build
 
 
-Esto facilita la escalabilidad y el mantenimiento del código.
 
-🏢 Autor
-AJSoftware
-Desarrollado por Jhonathan para facilitar la creación de proyectos modulares, reproducibles y escalables.
+🧑‍💻 Contribuciones
+¡Las contribuciones son bienvenidas! Puedes:
+- Proponer nuevas plantillas
+- Mejorar la documentación
+- Reportar errores o sugerencias
+git checkout -b feature/nueva-plantilla
+git commit -m "Agrega plantilla para módulo de pagos"
+git push origin feature/nueva-plantilla
+
+
+
+📜 Licencia
+Este proyecto está bajo la licencia MIT. Puedes usarlo, modificarlo y compartirlo libremente.
+
+👤 Autor
+Desarrollado por Jhonathan — arquitecto backend en AJSoftware, especializado en Gradle, Spring Boot Modulith y herramientas para desarrolladores.
+
+🌟 ¿Por qué usar este scaffolder?
+Porque cada línea está pensada para ti y tu equipo. Para que el onboarding sea claro, el código sea mantenible, y el desarrollo sea un placer.
