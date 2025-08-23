@@ -1,0 +1,60 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.ajsoftware.scaffold",
+    "module": "scaffolding",
+    "version": "1.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.13"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "scaffolding-1.0.0.jar",
+          "url": "scaffolding-1.0.0.jar",
+          "size": 68742,
+          "sha512": "016faf32b44b771c4d64fc41eec3b5946bdec4572369c9b60a469f441d71006153569a822ef55bc8bad43aecb2da4393da02a1171ea744741aa4a36dbee6edc1",
+          "sha256": "69da3cfd23ab4a87b5f79a6c27ef57213b4e7a4ee87ef0b6cc70e100554e3eb2",
+          "sha1": "8f10bf2c3043805369cd6c4f3c60be97cef5af30",
+          "md5": "3e2684bfba85cda449c63f872129786a"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "scaffolding-1.0.0.jar",
+          "url": "scaffolding-1.0.0.jar",
+          "size": 68742,
+          "sha512": "016faf32b44b771c4d64fc41eec3b5946bdec4572369c9b60a469f441d71006153569a822ef55bc8bad43aecb2da4393da02a1171ea744741aa4a36dbee6edc1",
+          "sha256": "69da3cfd23ab4a87b5f79a6c27ef57213b4e7a4ee87ef0b6cc70e100554e3eb2",
+          "sha1": "8f10bf2c3043805369cd6c4f3c60be97cef5af30",
+          "md5": "3e2684bfba85cda449c63f872129786a"
+        }
+      ]
+    }
+  ]
+}

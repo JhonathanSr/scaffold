@@ -1,0 +1,73 @@
+# 🧱 AJSoftware Scaffolding Plugin
+
+Plugin Gradle modular para generar proyectos y módulos con arquitectura limpia, ideal para Spring Boot 3.5. Incluye tareas para crear proyectos base, generar módulos funcionales y eliminar módulos obsoletos.
+
+---
+
+## ⚙️ Prerrequisitos
+
+- Java 17 o superior
+- Gradle 8+
+- Groovy instalado (si compilas desde fuente)
+- Acceso a `~/.m2` para publicar localmente
+
+---
+
+## 🚀 Instalación local
+
+Para compilar y publicar el plugin en tu repositorio Maven local:
+
+```bash
+./gradlew publishToMavenLocal
+
+
+Esto lo instalará en:
+~/.m2/repository/com/ajsoftware/scaffold/scaffolding/1.0.0
+
+
+
+🛠️ Uso en otros proyectos
+En el proyecto donde quieras usar el plugin, agrega lo siguiente:
+build.gradle
+buildscript {
+    repositories {
+        mavenLocal()
+    }
+    dependencies {
+        classpath 'com.ajsoftware.scaffold:scaffolding:1.0.0'
+    }
+}
+
+apply plugin: 'com.ajsoftware.scaffold'
+
+
+
+📦 Tareas disponibles
+|  |  |  |
+| createProject | cp |  |
+| generateModule | gm |  |
+| deleteModule | dm | settings.gradlebuild.gradle |
+
+
+
+🧪 Ejemplos de uso
+gradle cp --name=inventory --package=com.aj.inventory --javaVersion=21 --reactive=true
+gradle gm --name=inventory
+gradle dm --name=inventory
+
+
+Cada tarea imprime su propio ejemplo de uso antes de ejecutarse.
+
+🧠 Estructura modular interna
+El plugin está organizado en subpaquetes:
+com.ajsoftware.scaffold
+├── project      → createProject
+├── module       → generateModule
+└── delete       → deleteModule
+
+
+Esto facilita la escalabilidad y el mantenimiento del código.
+
+🏢 Autor
+AJSoftware
+Desarrollado por Jhonathan para facilitar la creación de proyectos modulares, reproducibles y escalables.
