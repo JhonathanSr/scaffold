@@ -30,16 +30,24 @@ plugins {
 
 ```bash
 # Crear proyecto
-./gradlew createProject -Pname=miapp -Ppackage=com.empresa.miapp
+gradle createProject -Pname=miapp -Ppackage=com.empresa.miapp
+
+# Si hay espacios en la ruta, usar comillas
+gradle createProject "-Pname=miapp" "-Ppackage=com.empresa.miapp"
 
 # Crear módulo
-./gradlew createModule -Pmodule=products
+gradle createModule -Pmodule=products
 
 # Agregar componentes
-./gradlew addComponent -Pmodule=products -Ptype=usecase -Pname=CreateProduct
-./gradlew addComponent -Pmodule=products -Ptype=controller -Pname=Product
-./gradlew addComponent -Pmodule=products -Ptype=repository -Pname=Product
+gradle addComponent -Pmodule=products -Ptype=usecase -Pname=CreateProduct
+gradle addComponent -Pmodule=products -Ptype=controller -Pname=Product
+gradle addComponent -Pmodule=products -Ptype=repository -Pname=Product
 ```
+
+## ⚠️ **Importante:**
+- **Evitar espacios** en nombres de directorios
+- **Usar comillas** si hay espacios en la ruta
+- **Usar guiones** en lugar de espacios: `mi-app` no `mi app`
 
 ## 🔗 Enlaces útiles
 

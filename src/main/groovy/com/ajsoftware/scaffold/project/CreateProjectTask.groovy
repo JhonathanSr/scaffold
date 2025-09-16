@@ -17,11 +17,6 @@ class CreateProjectTask extends DefaultTask {
         def year = Calendar.getInstance().get(Calendar.YEAR).toString()
 
         def baseDir = project.projectDir
-        def srcMain = new File(baseDir, "src/main/java/${basePackage.replace('.', '/')}")
-        def srcTest = new File(baseDir, "src/test/java/${basePackage.replace('.', '/')}")
-
-        srcMain.mkdirs()
-        srcTest.mkdirs()
 
         def binding = [
                 BASE_PACKAGE       : basePackage,
@@ -41,14 +36,13 @@ class CreateProjectTask extends DefaultTask {
                 'HELP.md.tpl'              : new File(baseDir, 'HELP.md'),
                 '.gitignore.tpl'           : new File(baseDir, '.gitignore'),
                 '.editorconfig.tpl'        : new File(baseDir, '.editorconfig'),
-                'application.yml.tpl'      : new File(baseDir, 'src/main/resources/application.yml'),
-                'application-test.yml.tpl' : new File(baseDir, 'src/test/resources/application-test.yml'),
-                'log4j2.properties.tpl'    : new File(baseDir, 'src/main/resources/log4j2.properties'),
-                'banner.txt.tpl'           : new File(baseDir, 'src/main/resources/banner.txt'),
-                'Application.java.tpl'     : new File(srcMain, 'Application.java'),
-                'StatusController.java.tpl': new File(srcMain, 'StatusController.java'),
-                'ApplicationTests.java.tpl': new File(srcTest, 'ApplicationTests.java'),
-                'ModulithTest.java.tpl'    : new File(srcTest, 'ModulithTest.java')
+                'application.yml.tpl'      : new File(baseDir, 'app/src/main/resources/application.yml'),
+                'application-test.yml.tpl' : new File(baseDir, 'app/src/test/resources/application-test.yml'),
+                'log4j2.properties.tpl'    : new File(baseDir, 'app/src/main/resources/log4j2.properties'),
+                'Application.java.tpl'     : new File(baseDir, 'app/src/main/java/' + basePackage.replace('.', '/') + '/Application.java'),
+                'StatusController.java.tpl': new File(baseDir, 'app/src/main/java/' + basePackage.replace('.', '/') + '/StatusController.java'),
+                'ApplicationTests.java.tpl': new File(baseDir, 'app/src/test/java/' + basePackage.replace('.', '/') + '/ApplicationTests.java'),
+                'ModulithTest.java.tpl'    : new File(baseDir, 'app/src/test/java/' + basePackage.replace('.', '/') + '/ModulithTest.java')
         ]
 
         templates.each { tplName, outputFile ->
@@ -60,11 +54,32 @@ class CreateProjectTask extends DefaultTask {
             ModuleFileHelper.writeUtf8File(outputFile.absolutePath, content)
         }
 
-        // Crear carpeta config para configuración global
-        new File(srcMain, 'config').mkdirs()
+        // Crear directorios base del proyecto
+        new File(baseDir, 'app/src/main/java').mkdirs()
+        new File(baseDir, 'app/src/main/resources').mkdirs()
+        new File(baseDir, 'app/src/test/java').mkdirs()
+        new File(baseDir, 'app/src/test/resources').mkdirs()
+        new File(baseDir, 'modules').mkdirs()
+        new File(baseDir, 'shared/src/main/java').mkdirs()
+        new File(baseDir, 'shared/src/test/java').mkdirs()
         
-        // Crear archivo de configuración global
-        def configFile = new File(srcMain, 'config/GlobalConfig.java')
+        // Generar build.gradle para app
+        def appBuildFile = new File(baseDir, 'app/build.gradle')
+        def appBuildContent = ModuleFileHelper.generateFromTemplate(this.class.classLoader, "module/app-build.gradle.tpl", binding)
+        appBuildFile.parentFile.mkdirs()
+        ModuleFileHelper.writeUtf8File(appBuildFile.absolutePath, appBuildContent)
+        
+        // Generar build.gradle para shared
+        def sharedBuildFile = new File(baseDir, 'shared/build.gradle')
+        def sharedBuildContent = ModuleFileHelper.generateFromTemplate(this.class.classLoader, "module/shared-build.gradle.tpl", binding)
+        sharedBuildFile.parentFile.mkdirs()
+        ModuleFileHelper.writeUtf8File(sharedBuildFile.absolutePath, sharedBuildContent)
+        
+        // Crear carpeta config para configuración global en app
+        new File(baseDir, 'app/src/main/java/' + basePackage.replace('.', '/') + '/config').mkdirs()
+        
+        // Crear archivo de configuración global en app
+        def configFile = new File(baseDir, 'app/src/main/java/' + basePackage.replace('.', '/') + '/config/GlobalConfig.java')
         configFile.text = """package ${basePackage}.config;
 
 import org.springframework.context.annotation.Configuration;

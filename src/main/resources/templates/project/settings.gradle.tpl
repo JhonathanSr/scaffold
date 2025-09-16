@@ -25,5 +25,12 @@ println """
 """
 
 // 📦 Inclusión de módulos base
-include 'app', 'modules', 'shared'
+include 'app', 'shared'
+
+// 📦 Módulos de negocio se agregarán dinámicamente
+// Ejemplo cuando se cree el módulo 'products':
+// include 'modules:products:domain:models'
+// include 'modules:products:domain:usecase'
+// include 'modules:products:infrastructure:driver-adapters'
+// include 'modules:products:infrastructure:driven-adapters'
 

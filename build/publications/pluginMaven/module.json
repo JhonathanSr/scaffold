@@ -27,11 +27,11 @@
         {
           "name": "scaffolding-plugin-1.0.0.jar",
           "url": "scaffolding-plugin-1.0.0.jar",
-          "size": 92617,
-          "sha512": "550b84932c93cf4bb3fb38d7f5407135b38d8d227b472d61802513f326329ef82604d47cb1ac45502a74658c5c693c210628cd0bb53656e388b66088e5659502",
-          "sha256": "e2e1051c8888b557223b31ff332186454b8f981b1a5b00139b5a13fe800dc6f9",
-          "sha1": "d08f8fe8b245e914ba13c1d4fe4f09b5917d1a3b",
-          "md5": "024104eae102adb09b51d942d754d3c6"
+          "size": 102462,
+          "sha512": "44d90c93c3c9d0d58991219bc103b236e1ad3acdd3fa8421e4cc09c9e80b77a768ecd7d7a0c76f853e0c95cbfb7a32f2439a7227f0616a76b2ef680984e1bc18",
+          "sha256": "f8d2be8d194542e18d1bdb39e44fdd272d53e057f96d45bb685c006edbfca562",
+          "sha1": "8d5e97dbd301f812e2e638c66793dc31d525b0b5",
+          "md5": "8fab71d23118ca3d05c9f4bce84e8180"
         }
       ]
     },
@@ -48,11 +48,11 @@
         {
           "name": "scaffolding-plugin-1.0.0.jar",
           "url": "scaffolding-plugin-1.0.0.jar",
-          "size": 92617,
-          "sha512": "550b84932c93cf4bb3fb38d7f5407135b38d8d227b472d61802513f326329ef82604d47cb1ac45502a74658c5c693c210628cd0bb53656e388b66088e5659502",
-          "sha256": "e2e1051c8888b557223b31ff332186454b8f981b1a5b00139b5a13fe800dc6f9",
-          "sha1": "d08f8fe8b245e914ba13c1d4fe4f09b5917d1a3b",
-          "md5": "024104eae102adb09b51d942d754d3c6"
+          "size": 102462,
+          "sha512": "44d90c93c3c9d0d58991219bc103b236e1ad3acdd3fa8421e4cc09c9e80b77a768ecd7d7a0c76f853e0c95cbfb7a32f2439a7227f0616a76b2ef680984e1bc18",
+          "sha256": "f8d2be8d194542e18d1bdb39e44fdd272d53e057f96d45bb685c006edbfca562",
+          "sha1": "8d5e97dbd301f812e2e638c66793dc31d525b0b5",
+          "md5": "8fab71d23118ca3d05c9f4bce84e8180"
         }
       ]
     },
@@ -88,11 +88,11 @@
         {
           "name": "scaffolding-plugin-1.0.0-sources.jar",
           "url": "scaffolding-plugin-1.0.0-sources.jar",
-          "size": 29008,
-          "sha512": "d57ef26d4106d0ca376225ed50eca0602e85d1cf6a1656d90268f6367ad870283530550d6b35928c679b75f91f181026bc2c2aa89372e478bdf0248d9a82c0c8",
-          "sha256": "d67319772d617f436e18a2e37caa5fb8aecac826ee9e650151c9c5571c12523a",
-          "sha1": "4188cc23d88d4eab30bc6f3877a69ca6028ea3a9",
-          "md5": "a2fc029be832d74c6cd8a5fa92a2ad76"
+          "size": 33389,
+          "sha512": "f5be0970013ec9cdff2ffa95eee2101ebbd08b6e6608bfa8479c718c515754092652c49f58265ba9caff34d9ff00fc9ddec2b1dda49cf8ffeb86860836f0324a",
+          "sha256": "4435edd37a696fa931444220712e51d6feb7a2a8ca629337664f4b0fcc0a6597",
+          "sha1": "9956d9c9d46b5ae4c39394c438448ba0ec200715",
+          "md5": "62f8dd1c5388da0e634fe5cf2e7a500b"
         }
       ]
     }

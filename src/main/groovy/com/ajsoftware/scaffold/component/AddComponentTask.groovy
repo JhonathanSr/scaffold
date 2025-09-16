@@ -40,15 +40,34 @@ class AddComponentTask extends DefaultTask {
         if (!moduleName && moduleFromProperty) moduleName = moduleFromProperty
         if (!componentType && typeFromProperty) componentType = typeFromProperty
         if (!componentName && nameFromProperty) componentName = nameFromProperty
-        if (!basePackage && packageFromProperty) basePackage = packageFromProperty
+        if (packageFromProperty) {
+            basePackage = packageFromProperty
+        }
         
-        basePackage = basePackage ?: 'com.ajsoftware'
+        // Detectar paquete base del proyecto existente
+        if (!packageFromProperty) {
+            def appSrcDir = new File(project.rootDir, 'app/src/main/java')
+            if (appSrcDir.exists()) {
+                def packageDirs = []
+                appSrcDir.eachDirRecurse { dir ->
+                    if (dir.name.matches('[a-z]+') && new File(dir, 'Application.java').exists()) {
+                        def relativePath = appSrcDir.toPath().relativize(dir.toPath()).toString()
+                        packageDirs.add(relativePath.replace(File.separator, '.'))
+                    }
+                }
+                if (packageDirs) {
+                    basePackage = packageDirs[0]
+                }
+            }
+        }
+        
+        basePackage = basePackage ?: 'com.empresa.ecommerce'
         
         if (!moduleName || !componentType || !componentName) {
             throw new GradleException("❌ Parámetros requeridos: -Pmodule=nombre -Ptype=tipo -Pname=nombre")
         }
 
-        def moduleDir = new File(project.rootDir, "src/main/java/${basePackage.replace('.', '/')}/${moduleName}")
+        def moduleDir = new File(project.rootDir, "modules/${moduleName}")
         if (!moduleDir.exists()) {
             throw new GradleException("❌ El módulo '${moduleName}' no existe. Créalo primero con createModule.")
         }

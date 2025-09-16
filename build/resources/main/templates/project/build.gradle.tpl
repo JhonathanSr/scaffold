@@ -1,19 +1,8 @@
-buildscript {
-        repositories {
-            mavenLocal()
-        }
-        dependencies {
-            classpath 'com.ajsoftware.scaffold:scaffolding:1.0.0'
-        }
-    }
-
 plugins {
     id 'org.springframework.boot' version '${SPRING_BOOT_VERSION}'
     id 'io.spring.dependency-management' version '1.1.4'
     id 'java'
 }
-
-apply plugin: 'com.ajsoftware.scaffold'
 
 group = '${BASE_PACKAGE}'
 version = '0.0.1-SNAPSHOT'
@@ -50,7 +39,6 @@ dependencies {
 
     // 🧪 Solo en perfil dev
     if (activeProfile == 'dev') {
-        implementation 'com.ajsoftware.scaffold:scaffolding:1.0.0' // Plugin interno
         implementation 'org.springframework.boot:spring-boot-devtools' // Hot reload
         implementation 'org.mockito:mockito-core:5.12.0' // Mocks para pruebas locales
         implementation 'org.apache.commons:commons-lang3:3.14.0' // Utilidades para desarrollo
