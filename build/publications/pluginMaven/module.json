@@ -1,7 +1,7 @@
 {
   "formatVersion": "1.1",
   "component": {
-    "group": "io.github.steverwi",
+    "group": "io.github.steverwiw",
     "module": "scaffolding-plugin",
     "version": "1.0.0",
     "attributes": {
@@ -27,11 +27,11 @@
         {
           "name": "scaffolding-plugin-1.0.0.jar",
           "url": "scaffolding-plugin-1.0.0.jar",
-          "size": 89838,
-          "sha512": "29d6c73848b42efe61dc1e31bb19c51fd668dcbaa2b1f9ffe221f60dec2ad71b710371f700bfa0fd0a1a3c6a00bc7dee8390b1d720ac0d170542d90eb1e108bd",
-          "sha256": "0ebfe420598061419d6244f93645002dce09243fcb1ce7135a0ebed9a07ef68e",
-          "sha1": "75953c4c53ba34c0170339d2d14e3d68246f61f7",
-          "md5": "8746743489343696a92193168315dc9f"
+          "size": 92617,
+          "sha512": "550b84932c93cf4bb3fb38d7f5407135b38d8d227b472d61802513f326329ef82604d47cb1ac45502a74658c5c693c210628cd0bb53656e388b66088e5659502",
+          "sha256": "e2e1051c8888b557223b31ff332186454b8f981b1a5b00139b5a13fe800dc6f9",
+          "sha1": "d08f8fe8b245e914ba13c1d4fe4f09b5917d1a3b",
+          "md5": "024104eae102adb09b51d942d754d3c6"
         }
       ]
     },
@@ -48,11 +48,11 @@
         {
           "name": "scaffolding-plugin-1.0.0.jar",
           "url": "scaffolding-plugin-1.0.0.jar",
-          "size": 89838,
-          "sha512": "29d6c73848b42efe61dc1e31bb19c51fd668dcbaa2b1f9ffe221f60dec2ad71b710371f700bfa0fd0a1a3c6a00bc7dee8390b1d720ac0d170542d90eb1e108bd",
-          "sha256": "0ebfe420598061419d6244f93645002dce09243fcb1ce7135a0ebed9a07ef68e",
-          "sha1": "75953c4c53ba34c0170339d2d14e3d68246f61f7",
-          "md5": "8746743489343696a92193168315dc9f"
+          "size": 92617,
+          "sha512": "550b84932c93cf4bb3fb38d7f5407135b38d8d227b472d61802513f326329ef82604d47cb1ac45502a74658c5c693c210628cd0bb53656e388b66088e5659502",
+          "sha256": "e2e1051c8888b557223b31ff332186454b8f981b1a5b00139b5a13fe800dc6f9",
+          "sha1": "d08f8fe8b245e914ba13c1d4fe4f09b5917d1a3b",
+          "md5": "024104eae102adb09b51d942d754d3c6"
         }
       ]
     },
@@ -88,11 +88,11 @@
         {
           "name": "scaffolding-plugin-1.0.0-sources.jar",
           "url": "scaffolding-plugin-1.0.0-sources.jar",
-          "size": 28966,
-          "sha512": "3d5ac73ed0b35cce8d1043351c48b1d5109a2b70b723faa47a606e80dd9baa4e390795f0d9233c6e370ec2280babcf5b9badc4b2e1fb65b37aa9c5010e36229b",
-          "sha256": "e0b4df516d43db5d21d1318017f4f53c20d2db4d1ef6eeac485c5fb56c5a419c",
-          "sha1": "ca593d6704e1e3faf73eeaf658258838ba7cfc9d",
-          "md5": "9e49fe27f0202ba34135313234e0877f"
+          "size": 29008,
+          "sha512": "d57ef26d4106d0ca376225ed50eca0602e85d1cf6a1656d90268f6367ad870283530550d6b35928c679b75f91f181026bc2c2aa89372e478bdf0248d9a82c0c8",
+          "sha256": "d67319772d617f436e18a2e37caa5fb8aecac826ee9e650151c9c5571c12523a",
+          "sha1": "4188cc23d88d4eab30bc6f3877a69ca6028ea3a9",
+          "md5": "a2fc029be832d74c6cd8a5fa92a2ad76"
         }
       ]
     }

@@ -5,7 +5,7 @@ plugins {
     id 'com.gradle.plugin-publish' version '1.2.1'
 }
 
-group = 'io.github.steverwi'
+group = 'io.github.steverwiw'
 version = '1.0.0'
 
 repositories {
@@ -28,7 +28,7 @@ gradlePlugin {
     
     plugins {
         scaffoldMain {
-            id = 'io.github.steverwi.scaffold'
+            id = 'io.github.steverwiw.scaffold'
             displayName = 'AJSoftware Spring Modulith Scaffolding'
             description = 'Generate Spring Modulith projects with hexagonal architecture and domain-driven design'
             tags = ['spring', 'modulith', 'hexagonal', 'architecture', 'scaffolding', 'ddd']

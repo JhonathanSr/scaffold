@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.ajsoftware.scaffold</groupId>
-  <artifactId>com.ajsoftware.scaffold.gradle.plugin</artifactId>
+  <groupId>io.github.steverwiw.scaffold</groupId>
+  <artifactId>io.github.steverwiw.scaffold.gradle.plugin</artifactId>
   <version>1.0.0</version>
   <packaging>pom</packaging>
+  <name>AJSoftware Spring Modulith Scaffolding</name>
+  <description>Generate Spring Modulith projects with hexagonal architecture and domain-driven design</description>
   <dependencies>
     <dependency>
-      <groupId>com.ajsoftware.scaffold</groupId>
+      <groupId>io.github.steverwiw</groupId>
       <artifactId>scaffolding-plugin</artifactId>
       <version>1.0.0</version>
     </dependency>

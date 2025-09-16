@@ -3,6 +3,7 @@ package com.ajsoftware.scaffold
 import com.ajsoftware.scaffold.delete.DeleteModuleTask
 import com.ajsoftware.scaffold.module.GenerateModuleTask
 import com.ajsoftware.scaffold.project.CreateProjectTask
+import com.ajsoftware.scaffold.component.AddComponentTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -10,14 +11,20 @@ class ScaffoldingPlugin implements Plugin<Project> {
 
     @Override
     void apply(Project project) {
-        project.pluginManager.apply('com.ajsoftware.scaffold.project')
-        project.pluginManager.apply('com.ajsoftware.scaffold.module')
-        project.pluginManager.apply('com.ajsoftware.scaffold.component')
+        // Registrar todas las tareas directamente
+        project.tasks.register('createProject', CreateProjectTask) {
+            group = 'Scaffolding'
+            description = 'Crea un nuevo proyecto Spring Modulith con arquitectura hexagonal'
+        }
         
-        // Registrar tarea createModule desde el plugin de módulos
-        project.tasks.register('createModule', com.ajsoftware.scaffold.module.GenerateModuleTask) {
+        project.tasks.register('createModule', GenerateModuleTask) {
             group = 'Scaffolding'
             description = 'Crea un nuevo módulo con estructura hexagonal'
+        }
+        
+        project.tasks.register('addComponent', AddComponentTask) {
+            group = 'Scaffolding'
+            description = 'Agrega un componente a un módulo existente'
         }
 
         project.tasks.register('scaffoldHelp') {
