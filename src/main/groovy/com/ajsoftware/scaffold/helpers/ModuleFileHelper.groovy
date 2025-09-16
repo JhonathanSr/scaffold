@@ -62,40 +62,36 @@ class ModuleFileHelper {
     }
 
         /**
-     * Registra el módulo en settings.gradle si no está incluido.
-     *
-     * @param rootDir Directorio raíz del proyecto
-     * @param moduleName Nombre del módulo a incluir
+     * Valida que el nombre del módulo sea válido para Spring Modulith
      */
-    static void registerModuleInSettings(File rootDir, String moduleName) {
-        def settingsFile = new File(rootDir, 'settings.gradle')
-        def includeLine = "include 'modules/${moduleName}'"
-        if (!settingsFile.text.contains(includeLine)) {
-            settingsFile.append("\n${includeLine}")
+    static void validateModuleName(String moduleName) {
+        if (!moduleName) {
+            throw new IllegalArgumentException("❌ El nombre del módulo no puede estar vacío")
+        }
+        if (!moduleName.matches(/^[a-z][a-z0-9]*$/)) {
+            throw new IllegalArgumentException("❌ El nombre del módulo debe ser lowercase y solo contener letras y números: ${moduleName}")
         }
     }
 
     /**
-     * Registra el módulo como dependencia en boot/build.gradle si no está presente.
-     *
-     * @param rootDir Directorio raíz del proyecto
-     * @param moduleName Nombre del módulo a agregar como dependencia
+     * Crea un comentario de documentación para package-info.java
      */
-    static void registerModuleInBootBuild(File rootDir, String moduleName) {
-        def bootBuildFile = new File(rootDir, 'boot/build.gradle')
-        def dependencyLine = "implementation project(':modules/${moduleName}')"
-        if (!bootBuildFile.text.contains(dependencyLine)) {
-            def depsBlock = bootBuildFile.text.find(/dependencies \{[\s\S]*?\}/)
-            if (depsBlock) {
-                def newDepsBlock = depsBlock.replace(
-                    'dependencies {',
-                    "dependencies {\n    ${dependencyLine}"
-                )
-                bootBuildFile.text = bootBuildFile.text.replace(depsBlock, newDepsBlock)
-            } else {
-                bootBuildFile.append("\ndependencies {\n    ${dependencyLine}\n}")
-            }
-        }
+    static String createModuleDocumentation(String moduleName, String basePackage) {
+        return """/**
+ * Módulo ${capitalizeFirst(moduleName)} - Arquitectura Hexagonal
+ * 
+ * Este módulo sigue los principios de arquitectura hexagonal y Spring Modulith:
+ * - domain/model/: Modelos de dominio ricos
+ * - domain/port/in/: Puertos de entrada (casos de uso)
+ * - domain/port/out/: Puertos de salida (repositorios, servicios externos)
+ * - domain/service/: Implementaciones de casos de uso
+ * - adapter/in/: Adaptadores de entrada (controladores, listeners)
+ * - adapter/out/: Adaptadores de salida (persistencia, servicios externos)
+ * 
+ * @author Scaffolding Plugin
+ */
+package ${basePackage}.${moduleName};
+"""
     }
 
 }

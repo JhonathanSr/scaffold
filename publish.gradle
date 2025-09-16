@@ -1,0 +1,46 @@
+// Configuración para publicar en GitHub Packages o Maven Central
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+            
+            pom {
+                name = 'AJSoftware Scaffolding Plugin'
+                description = 'Spring Modulith scaffolding plugin for hexagonal architecture'
+                url = 'https://github.com/tu-usuario/scaffolding'
+                
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'https://opensource.org/licenses/MIT'
+                    }
+                }
+                
+                developers {
+                    developer {
+                        id = 'ajsoftware'
+                        name = 'AJSoftware Team'
+                        email = 'dev@ajsoftware.com'
+                    }
+                }
+                
+                scm {
+                    connection = 'scm:git:git://github.com/tu-usuario/scaffolding.git'
+                    developerConnection = 'scm:git:ssh://github.com/tu-usuario/scaffolding.git'
+                    url = 'https://github.com/tu-usuario/scaffolding'
+                }
+            }
+        }
+    }
+    
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = "https://maven.pkg.github.com/tu-usuario/scaffolding"
+            credentials {
+                username = System.getenv("GITHUB_USERNAME")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
+}

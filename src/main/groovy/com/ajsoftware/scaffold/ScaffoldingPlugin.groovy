@@ -12,6 +12,7 @@ class ScaffoldingPlugin implements Plugin<Project> {
     void apply(Project project) {
         project.pluginManager.apply('com.ajsoftware.scaffold.project')
         project.pluginManager.apply('com.ajsoftware.scaffold.module')
+        project.pluginManager.apply('com.ajsoftware.scaffold.component')
 
         project.tasks.register('scaffoldHelp') {
             group = 'Scaffolding'
@@ -22,6 +23,7 @@ class ScaffoldingPlugin implements Plugin<Project> {
 
                 project.tasks.findByName('projectHelp')?.execute()
                 project.tasks.findByName('moduleHelp')?.execute()
+                project.tasks.findByName('componentHelp')?.execute()
             }
         }
     }

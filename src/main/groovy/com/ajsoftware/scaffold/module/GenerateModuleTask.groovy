@@ -24,7 +24,7 @@ class GenerateModuleTask extends DefaultTask {
 
     @TaskAction
     void generate() {
-        validateModuleName(moduleName)
+        ModuleFileHelper.validateModuleName(moduleName)
 
         def moduleDir = new File(project.rootDir, "modules/${moduleName}")
         if (moduleDir.exists()) {
@@ -33,32 +33,29 @@ class GenerateModuleTask extends DefaultTask {
 
         println "🧱 Generando módulo '${moduleName}' (${moduleType}) en: ${moduleDir}"
 
-        // Estructura base
+        // Estructura base compatible con Spring Modulith
+        def packagePath = "src/main/java/${basePackage.replace('.', '/')}/${moduleName}"
         def folders = [
-            'domain',
-            'infrastructure/driven-adapters',
-            'infrastructure/entry-points',
-            'test'
+            "${packagePath}/domain/model",
+            "${packagePath}/domain/port/in",
+            "${packagePath}/domain/port/out",
+            "${packagePath}/domain/service",
+            "${packagePath}/adapter/in/web",
+            "${packagePath}/adapter/in/web/dto",
+            "${packagePath}/adapter/out/persistence",
+            "${packagePath}/adapter/out/persistence/entity",
+            "${packagePath}/adapter/out/persistence/repository",
+            "src/test/java/${basePackage.replace('.', '/')}/${moduleName}"
         ]
 
-        switch (moduleType.toLowerCase()) {
-            case 'rest':
-                folders += ['application/rest']
-                break
-            case 'batch':
-                folders += ['application/batch']
-                break
-            case 'default':
-                folders += ['application']
-                break
-            default:
-                println "⚠ Tipo de módulo desconocido: '${moduleType}'. Se usará estructura por defecto."
-                folders += ['application']
+        folders.each { path ->
+            new File(project.rootDir, path).mkdirs()
         }
 
-        folders.each { path ->
-            new File(moduleDir, path).mkdirs()
-        }
+        // Crear package-info.java para documentar el módulo
+        def packageInfoDir = new File(project.rootDir, "src/main/java/${basePackage.replace('.', '/')}/${moduleName}")
+        def packageInfoFile = new File(packageInfoDir, "package-info.java")
+        packageInfoFile.text = createModuleDocumentation(moduleName, basePackage)
 
         // Variables para plantilla
         def vars = [
@@ -67,29 +64,20 @@ class GenerateModuleTask extends DefaultTask {
             MODULE_CAP  : capitalizeFirst(moduleName)
         ]
 
-        // Generar build.gradle
-        def buildGradleFile = new File(moduleDir, 'build.gradle')
-        buildGradleFile.text = generateFromTemplate(
-            this.class.classLoader,
-            'module/build.gradle.tpl',
-            vars
-        )
+        // En monolito modular no necesitamos build.gradle separados
+        // Los módulos son paquetes Java organizados según Spring Modulith
 
-        // Actualizar settings.gradle y boot/build.gradle
-        registerModuleInSettings(project.rootDir, moduleName)
-        registerModuleInBootBuild(project.rootDir, moduleName)
-
-        println '''
-📦 Estructura generada:
-- domain/
-- infrastructure/driven-adapters/
-- infrastructure/entry-points/
-- application/
-- test/
-✔ build.gradle generado
-✔ settings.gradle actualizado
-✔ boot/build.gradle actualizado
-'''
+        println """
+📦 Módulo '${moduleName}' generado con estructura hexagonal:
+- domain/model/ (modelos de dominio)
+- domain/port/in/ (casos de uso)
+- domain/port/out/ (puertos de salida)
+- domain/service/ (implementaciones)
+- adapter/in/web/ (controladores REST)
+- adapter/out/persistence/ (adaptadores de BD)
+✔ package-info.java creado
+✔ Estructura compatible con Spring Modulith
+"""
     }
 
 }

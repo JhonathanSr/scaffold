@@ -41,11 +41,12 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-log4j2'
-    implementation "org.springframework.modulith:spring-modulith-starter-core:${MODULITH_VERSION}"
+    implementation 'org.springframework.boot:spring-boot-starter-modulith'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.modulith:spring-modulith-starter-test'
 
     // 🧪 Solo en perfil dev
     if (activeProfile == 'dev') {

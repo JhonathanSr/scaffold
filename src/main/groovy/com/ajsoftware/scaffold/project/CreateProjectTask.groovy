@@ -47,7 +47,8 @@ class CreateProjectTask extends DefaultTask {
                 'banner.txt.tpl'           : new File(baseDir, 'src/main/resources/banner.txt'),
                 'Application.java.tpl'     : new File(srcMain, 'Application.java'),
                 'StatusController.java.tpl': new File(srcMain, 'StatusController.java'),
-                'ApplicationTests.java.tpl': new File(srcTest, 'ApplicationTests.java')
+                'ApplicationTests.java.tpl': new File(srcTest, 'ApplicationTests.java'),
+                'ModulithTest.java.tpl'    : new File(srcTest, 'ModulithTest.java')
         ]
 
         templates.each { tplName, outputFile ->
@@ -59,27 +60,30 @@ class CreateProjectTask extends DefaultTask {
             ModuleFileHelper.writeUtf8File(outputFile.absolutePath, content)
         }
 
-        // Crear carpetas base para módulos
-        new File(baseDir, 'modules').mkdirs()
-        new File(baseDir, 'app').mkdirs()
-        new File(baseDir, 'shared').mkdirs()
+        // Crear carpeta config para configuración global
+        new File(srcMain, 'config').mkdirs()
+        
+        // Crear archivo de configuración global
+        def configFile = new File(srcMain, 'config/GlobalConfig.java')
+        configFile.text = """package ${basePackage}.config;
 
-        // Crear build.gradle básico para boot y shared
-        new File(baseDir, 'app/build.gradle').text = """plugins {
-    id 'java-library'
-        }
-dependencies {
-// @module-dependencies
+import org.springframework.context.annotation.Configuration;
+
+/**
+ * Configuración global de la aplicación
+ * Aquí van las configuraciones que afectan a toda la aplicación
+ */
+@Configuration
+public class GlobalConfig {
+    // Configuraciones globales
 }
 """
-        new File(baseDir, 'shared/build.gradle').text = """plugins {
-    id 'java-library'
-        }
-"""
 
-        println "✅ Proyecto generado en ${baseDir.absolutePath} con paquete base '${basePackage}'"
-        println "📂 Estructura lista para módulos en: ${baseDir}/modules"
-        println '📝 Archivos base generados: README.md, settings.gradle, build.gradle'
+        println "✅ Proyecto Spring Modulith generado en ${baseDir.absolutePath}"
+        println "📦 Paquete base: ${basePackage}"
+        println "🏠 Estructura de monolito modular lista"
+        println '📝 Archivos generados: README.md, settings.gradle, build.gradle'
+        println '🚀 Usa: ./gradlew createModule --name=orders para crear módulos'
     }
 
 }

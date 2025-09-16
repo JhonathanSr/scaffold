@@ -1,18 +1,18 @@
-# 🛠️ AJSoftware Scaffold Plugin
+# 🛠️ AJSoftware Scaffold Plugin - Spring Modulith Edition
 
-Generador modular para proyectos Spring Boot con enfoque en automatización, mantenibilidad y experiencia del desarrollador. Diseñado para crear estructuras limpias, reproducibles y listas para escalar.
+Generador modular para proyectos Spring Boot con arquitectura hexagonal y Spring Modulith. Diseñado para crear monolitos modulares mantenibles, escalables y con separación clara de responsabilidades.
 
 ---
 
 ## 🚀 Características principales
 
-- 🔧 Generación de módulos con estructura parametrizada
-- 📦 Plantillas extensibles para `build.gradle`, controladores, servicios y pruebas
-- 🧪 Endpoint de status funcional (`/api/status`) para validación rápida
-- 🐳 Integración automática con Docker (`Dockerfile`, `.dockerignore`, `docker-compose.yml`)
-- 🧩 Soporte para Spring Boot Modulith con configuración lista para inyección
-- 📚 Documentación y onboarding automatizado para nuevos desarrolladores
-- 🛡️ Validación de errores y mensajes de ayuda integrados
+- 🏗️ **Arquitectura Hexagonal**: Separación clara entre dominio, puertos y adaptadores
+- 🧩 **Spring Modulith**: Verificación automática de dependencias entre módulos
+- 📦 **Monolito Modular**: Un solo proyecto con módulos bien definidos
+- 🔧 **Scaffolding Inteligente**: Generación de componentes con un solo comando
+- 🧪 **Testing Integrado**: Tests de arquitectura y verificación de módulos
+- 📚 **Documentación Automática**: Generación de diagramas PlantUML
+- 🛡️ **Validación de Estructura**: Verificación automática de reglas arquitectónicas
 
 ---
 
@@ -23,57 +23,94 @@ git clone https://github.com/SteverWiw/scaffold.git
 cd scaffold
 ./gradlew build
 
-🧪 Validación rápida
-./gradlew bootRun
-curl http://localhost:8080/api/status
+## 📚 Guía de uso
+
+### 1. Crear un nuevo proyecto
+```bash
+./gradlew createProject --name=mi-app --package=com.empresa.miapp
+```
+
+### 2. Crear módulos de negocio
+```bash
+./gradlew createModule --name=orders
+./gradlew createModule --name=customers
+./gradlew createModule --name=inventory
+```
+
+### 3. Agregar componentes a los módulos
+```bash
+# Casos de uso
+./gradlew addComponent --module=orders --type=usecase --name=CreateOrder
+./gradlew addComponent --module=orders --type=usecase --name=CancelOrder
+
+# Controladores REST
+./gradlew addComponent --module=orders --type=controller --name=Order
+
+# Modelos de dominio
+./gradlew addComponent --module=orders --type=model --name=Order
+
+# Repositorios
+./gradlew addComponent --module=orders --type=repository --name=Order
+```
+
+### 4. Verificar la arquitectura
+```bash
+./gradlew test --tests="*ModulithTest"
+```
+
+## 🏗️ Estructura generada
+
+Cada módulo sigue la arquitectura hexagonal:
+
+```
+src/main/java/com/empresa/miapp/
+├── orders/                          # Módulo de órdenes
+│   ├── package-info.java           # Documentación del módulo
+│   ├── domain/                     # Núcleo del negocio
+│   │   ├── model/                  # Modelos de dominio
+│   │   ├── port/
+│   │   │   ├── in/                 # Casos de uso (puertos de entrada)
+│   │   │   └── out/                # Repositorios (puertos de salida)
+│   │   └── service/                # Implementaciones de casos de uso
+│   └── adapter/                    # Infraestructura
+│       ├── in/web/                 # Controladores REST
+│       └── out/persistence/        # Adaptadores de base de datos
+└── customers/                       # Módulo de clientes
+    └── ... (misma estructura)
+```
+
+## 🔧 Comandos disponibles
+
+| Comando | Descripción | Ejemplo |
+|---------|-------------|----------|
+| `createProject` | Crea un nuevo proyecto Spring Modulith | `--name=miapp --package=com.empresa.miapp` |
+| `createModule` | Crea un nuevo módulo con estructura hexagonal | `--name=orders` |
+| `addComponent` | Agrega componente a un módulo existente | `--module=orders --type=usecase --name=CreateOrder` |
+| `scaffoldHelp` | Muestra ayuda completa de todos los comandos | |
+
+### Tipos de componentes soportados:
+- **usecase**: Caso de uso + implementación
+- **controller**: Controlador REST + DTOs
+- **repository**: Puerto + adaptador + entidad JPA
+- **model**: Modelo de dominio
+- **adapter**: Adaptador genérico
 
 
 
-🧰 Uso del plugin
-Crear un nuevo módulo
-./gradlew generateModule \
-  --moduleName=inventory \
-  --package=com.ajsoftware.inventory \
-  --withDocker=true \
-  --withTests=true
+## 🧪 Verificación de arquitectura
 
+Spring Modulith verifica automáticamente:
+- **Dependencias entre módulos**: Evita dependencias cíclicas
+- **Encapsulación**: Solo las clases públicas son accesibles
+- **Estructura de paquetes**: Valida la organización modular
 
-Esto generará:
-- inventory con estructura limpia
-- build.gradle inyectado con dependencias necesarias
-- Controlador REST base (InventoryController)
-- Pruebas unitarias y de integración
-- Configuración Docker lista para usar
+```bash
+# Ejecutar verificación
+./gradlew test --tests="*ModulithTest"
 
-🧠 Filosofía del proyecto
-Este scaffolder nace de la necesidad de crear proyectos que:
-- Sean fáciles de entender y extender
-- Tengan una estructura reproducible para cualquier equipo
-- Ofrezcan una experiencia de onboarding clara y profesional
-- Permitan escalar sin sacrificar mantenibilidad
-Cada módulo generado está diseñado para ser plug-and-play, con hooks listos para configuración, logging y pruebas.
-
-🧩 Extensión del plugin
-Puedes personalizar las plantillas ubicadas en:
-src/main/resources/templates/
-
-
-Variables disponibles:
-- {{moduleName}}
-- {{package}}
-- {{withDocker}}
-- {{withTests}}
-También puedes agregar nuevas tareas Gradle en:
-src/main/kotlin/com/ajsoftware/scaffold/tasks/
-
-
-
-🐳 Docker integrado
-Cada módulo puede incluir automáticamente:
-- Dockerfile optimizado para Spring Boot
-- .dockerignore para evitar archivos innecesarios
-- docker-compose.yml con configuración base
-docker-compose up --build
+# Generar documentación
+./gradlew test # Genera diagramas PlantUML automáticamente
+```
 
 
 

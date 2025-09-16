@@ -34,19 +34,11 @@ gradlePlugin {
             id = 'com.ajsoftware.scaffold.delete'
             implementationClass = 'com.ajsoftware.scaffold.delete.DeletePlugin'
         }
+        scaffoldComponent {
+            id = 'com.ajsoftware.scaffold.component'
+            implementationClass = 'com.ajsoftware.scaffold.component.ComponentPlugin'
+        }
     }
 }
 
-publishing {
-    publications {
-        scaffoldPlugin(MavenPublication) {
-            from components.java
-            groupId = 'com.ajsoftware.scaffold'
-            artifactId = 'scaffolding'
-            version = '1.0.0'
-        }
-    }
-    repositories {
-        mavenLocal()
-    }
-}
+apply from: 'publish.gradle'

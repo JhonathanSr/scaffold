@@ -1,0 +1,35 @@
+// Configuración para crear distribución standalone
+apply plugin: 'application'
+
+mainClassName = 'com.ajsoftware.scaffold.cli.ScaffoldCLI'
+
+distributions {
+    main {
+        distributionBaseName = 'ajscaffold'
+        contents {
+            from(jar)
+            from(configurations.runtimeClasspath)
+            into('lib') {
+                from configurations.runtimeClasspath
+            }
+            into('bin') {
+                from 'src/main/scripts'
+                fileMode = 0755
+            }
+        }
+    }
+}
+
+// Crear ejecutable nativo con GraalVM (opcional)
+if (project.hasProperty('graalvm')) {
+    apply plugin: 'org.graalvm.buildtools.native'
+    
+    graalvmNative {
+        binaries {
+            main {
+                imageName = 'ajscaffold'
+                mainClass = 'com.ajsoftware.scaffold.cli.ScaffoldCLI'
+            }
+        }
+    }
+}
