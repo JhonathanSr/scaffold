@@ -13,6 +13,12 @@ class ScaffoldingPlugin implements Plugin<Project> {
         project.pluginManager.apply('com.ajsoftware.scaffold.project')
         project.pluginManager.apply('com.ajsoftware.scaffold.module')
         project.pluginManager.apply('com.ajsoftware.scaffold.component')
+        
+        // Registrar tarea createModule desde el plugin de módulos
+        project.tasks.register('createModule', com.ajsoftware.scaffold.module.GenerateModuleTask) {
+            group = 'Scaffolding'
+            description = 'Crea un nuevo módulo con estructura hexagonal'
+        }
 
         project.tasks.register('scaffoldHelp') {
             group = 'Scaffolding'
@@ -21,9 +27,13 @@ class ScaffoldingPlugin implements Plugin<Project> {
             doLast {
                 println '\n🧱 AJSoftware Scaffolding Plugin - Ejemplos de uso\n'
 
-                project.tasks.findByName('projectHelp')?.execute()
-                project.tasks.findByName('moduleHelp')?.execute()
-                project.tasks.findByName('componentHelp')?.execute()
+                def projectHelpTask = project.tasks.findByName('projectHelp')
+                def moduleHelpTask = project.tasks.findByName('moduleHelp')
+                def componentHelpTask = project.tasks.findByName('componentHelp')
+                
+                if (projectHelpTask) projectHelpTask.actions.each { it.execute(projectHelpTask) }
+                if (moduleHelpTask) moduleHelpTask.actions.each { it.execute(moduleHelpTask) }
+                if (componentHelpTask) componentHelpTask.actions.each { it.execute(componentHelpTask) }
             }
         }
     }

@@ -11,9 +11,9 @@ import static com.ajsoftware.scaffold.helpers.ModuleFileHelper.*
 
 class AddComponentTask extends DefaultTask {
 
-    @Input String moduleName
-    @Input String componentType
-    @Input String componentName
+    @Input @Optional String moduleName
+    @Input @Optional String componentType
+    @Input @Optional String componentName
     @Input @Optional String basePackage = 'com.ajsoftware'
 
     @Option(option = 'module', description = 'Nombre del módulo donde agregar el componente')
@@ -30,8 +30,22 @@ class AddComponentTask extends DefaultTask {
 
     @TaskAction
     void generate() {
+        // Obtener valores de propiedades del proyecto
+        def moduleFromProperty = project.findProperty('module')
+        def typeFromProperty = project.findProperty('type')
+        def nameFromProperty = project.findProperty('name')
+        def packageFromProperty = project.findProperty('package')
+        
+        // Usar valores de propiedades si no están configurados
+        if (!moduleName && moduleFromProperty) moduleName = moduleFromProperty
+        if (!componentType && typeFromProperty) componentType = typeFromProperty
+        if (!componentName && nameFromProperty) componentName = nameFromProperty
+        if (!basePackage && packageFromProperty) basePackage = packageFromProperty
+        
+        basePackage = basePackage ?: 'com.ajsoftware'
+        
         if (!moduleName || !componentType || !componentName) {
-            throw new GradleException("❌ Parámetros requeridos: --module, --type, --name")
+            throw new GradleException("❌ Parámetros requeridos: -Pmodule=nombre -Ptype=tipo -Pname=nombre")
         }
 
         def moduleDir = new File(project.rootDir, "src/main/java/${basePackage.replace('.', '/')}/${moduleName}")

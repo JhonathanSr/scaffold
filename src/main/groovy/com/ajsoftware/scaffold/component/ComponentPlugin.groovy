@@ -20,11 +20,11 @@ class ComponentPlugin implements Plugin<Project> {
                 println '''
 🧩 Ejemplos de uso - Agregar Componentes:
 
-./gradlew addComponent --module=orders --type=usecase --name=CreateOrder
-./gradlew addComponent --module=orders --type=controller --name=Order
-./gradlew addComponent --module=inventory --type=model --name=Product
-./gradlew addComponent --module=customers --type=repository --name=Customer
-./gradlew addComponent --module=orders --type=adapter --name=OrderNotification
+./gradlew addComponent -Pmodule=orders -Ptype=usecase -Pname=CreateOrder
+./gradlew addComponent -Pmodule=orders -Ptype=controller -Pname=Order
+./gradlew addComponent -Pmodule=inventory -Ptype=model -Pname=Product
+./gradlew addComponent -Pmodule=customers -Ptype=repository -Pname=Customer
+./gradlew addComponent -Pmodule=orders -Ptype=adapter -Pname=OrderNotification
 
 Tipos soportados: usecase, controller, repository, model, adapter
 '''

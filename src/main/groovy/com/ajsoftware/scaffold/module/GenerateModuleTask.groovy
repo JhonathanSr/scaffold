@@ -9,7 +9,7 @@ import static com.ajsoftware.scaffold.helpers.ModuleFileHelper.*
 
 class GenerateModuleTask extends DefaultTask {
 
-    @Input String moduleName
+    @Input @Optional String moduleName
     @Input @Optional String basePackage = 'com.ajsoftware'
     @Input @Optional String moduleType = 'default'
 
@@ -24,9 +24,35 @@ class GenerateModuleTask extends DefaultTask {
 
     @TaskAction
     void generate() {
-        ModuleFileHelper.validateModuleName(moduleName)
+        // Obtener valores de propiedades del proyecto
+        def moduleNameFromProperty = project.findProperty('module') ?: project.findProperty('name')
+        def packageFromProperty = project.findProperty('package')
+        def typeFromProperty = project.findProperty('type')
+        
+        // Usar valores de propiedades si no están configurados
+        if (!moduleName && moduleNameFromProperty) {
+            moduleName = moduleNameFromProperty
+        }
+        if (!basePackage && packageFromProperty) {
+            basePackage = packageFromProperty
+        }
+        if (!moduleType && typeFromProperty) {
+            moduleType = typeFromProperty
+        }
+        
+        // Valores por defecto
+        basePackage = basePackage ?: 'com.ajsoftware'
+        moduleType = moduleType ?: 'default'
+        
+        if (!moduleName) {
+            throw new GradleException("❌ Parámetro requerido: -Pname=nombre-modulo")
+        }
+        
+        com.ajsoftware.scaffold.helpers.ModuleFileHelper.validateModuleName(moduleName)
 
-        def moduleDir = new File(project.rootDir, "modules/${moduleName}")
+        // Crear estructura en src/main/java en lugar de modules/
+        def modulePackagePath = "src/main/java/${basePackage.replace('.', '/')}/${moduleName}"
+        def moduleDir = new File(project.rootDir, modulePackagePath)
         if (moduleDir.exists()) {
             throw new GradleException("⚠ El módulo '${moduleName}' ya existe. Usa otro nombre o elimínalo primero.")
         }
@@ -55,7 +81,7 @@ class GenerateModuleTask extends DefaultTask {
         // Crear package-info.java para documentar el módulo
         def packageInfoDir = new File(project.rootDir, "src/main/java/${basePackage.replace('.', '/')}/${moduleName}")
         def packageInfoFile = new File(packageInfoDir, "package-info.java")
-        packageInfoFile.text = createModuleDocumentation(moduleName, basePackage)
+        packageInfoFile.text = com.ajsoftware.scaffold.helpers.ModuleFileHelper.createModuleDocumentation(moduleName, basePackage)
 
         // Variables para plantilla
         def vars = [
