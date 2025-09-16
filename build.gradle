@@ -5,7 +5,7 @@ plugins {
     id 'com.gradle.plugin-publish' version '1.2.1'
 }
 
-group = 'com.ajsoftware.scaffold'
+group = 'io.github.steverwi'
 version = '1.0.0'
 
 repositories {
@@ -23,34 +23,18 @@ processResources {
 }
 
 gradlePlugin {
+    website = 'https://github.com/SteverWiw/scaffolding'
+    vcsUrl = 'https://github.com/SteverWiw/scaffolding.git'
+    
     plugins {
         scaffoldMain {
-            id = 'com.ajsoftware.scaffold'
+            id = 'io.github.steverwi.scaffold'
+            displayName = 'AJSoftware Spring Modulith Scaffolding'
+            description = 'Generate Spring Modulith projects with hexagonal architecture and domain-driven design'
+            tags = ['spring', 'modulith', 'hexagonal', 'architecture', 'scaffolding', 'ddd']
             implementationClass = 'com.ajsoftware.scaffold.ScaffoldingPlugin'
-        }
-        scaffoldProject {
-            id = 'com.ajsoftware.scaffold.project'
-            implementationClass = 'com.ajsoftware.scaffold.project.ProjectPlugin'
-        }
-        scaffoldModule {
-            id = 'com.ajsoftware.scaffold.module'
-            implementationClass = 'com.ajsoftware.scaffold.module.ModulePlugin'
-        }
-        scaffoldDelete {
-            id = 'com.ajsoftware.scaffold.delete'
-            implementationClass = 'com.ajsoftware.scaffold.delete.DeletePlugin'
-        }
-        scaffoldComponent {
-            id = 'com.ajsoftware.scaffold.component'
-            implementationClass = 'com.ajsoftware.scaffold.component.ComponentPlugin'
         }
     }
 }
 
 apply from: 'publish.gradle'
-
-// Configuración para Gradle Plugin Portal
-gradlePlugin {
-    website = 'https://github.com/SteverWiw/scaffolding'
-    vcsUrl = 'https://github.com/SteverWiw/scaffolding.git'
-}

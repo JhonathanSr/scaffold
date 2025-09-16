@@ -1,7 +1,7 @@
 {
   "formatVersion": "1.1",
   "component": {
-    "group": "com.ajsoftware.scaffold",
+    "group": "io.github.steverwi",
     "module": "scaffolding-plugin",
     "version": "1.0.0",
     "attributes": {
@@ -27,11 +27,11 @@
         {
           "name": "scaffolding-plugin-1.0.0.jar",
           "url": "scaffolding-plugin-1.0.0.jar",
-          "size": 90639,
-          "sha512": "b8760da1363efe8b2d337caa2c173c587246872b53a3fbb6343d68350ff7ca61dc42406b5ab3302499e918abfc2717f25a8e364d53df2622c3d7631be81a1b25",
-          "sha256": "5d564762400244f00e53d290ac023f6501b328b51ed6aef21e6c0dee6d756efe",
-          "sha1": "3de139c4f91abe1c0dc83545844237c99f6e81b9",
-          "md5": "395b73c2347179a030e65902a85f8925"
+          "size": 89838,
+          "sha512": "29d6c73848b42efe61dc1e31bb19c51fd668dcbaa2b1f9ffe221f60dec2ad71b710371f700bfa0fd0a1a3c6a00bc7dee8390b1d720ac0d170542d90eb1e108bd",
+          "sha256": "0ebfe420598061419d6244f93645002dce09243fcb1ce7135a0ebed9a07ef68e",
+          "sha1": "75953c4c53ba34c0170339d2d14e3d68246f61f7",
+          "md5": "8746743489343696a92193168315dc9f"
         }
       ]
     },
@@ -48,11 +48,11 @@
         {
           "name": "scaffolding-plugin-1.0.0.jar",
           "url": "scaffolding-plugin-1.0.0.jar",
-          "size": 90639,
-          "sha512": "b8760da1363efe8b2d337caa2c173c587246872b53a3fbb6343d68350ff7ca61dc42406b5ab3302499e918abfc2717f25a8e364d53df2622c3d7631be81a1b25",
-          "sha256": "5d564762400244f00e53d290ac023f6501b328b51ed6aef21e6c0dee6d756efe",
-          "sha1": "3de139c4f91abe1c0dc83545844237c99f6e81b9",
-          "md5": "395b73c2347179a030e65902a85f8925"
+          "size": 89838,
+          "sha512": "29d6c73848b42efe61dc1e31bb19c51fd668dcbaa2b1f9ffe221f60dec2ad71b710371f700bfa0fd0a1a3c6a00bc7dee8390b1d720ac0d170542d90eb1e108bd",
+          "sha256": "0ebfe420598061419d6244f93645002dce09243fcb1ce7135a0ebed9a07ef68e",
+          "sha1": "75953c4c53ba34c0170339d2d14e3d68246f61f7",
+          "md5": "8746743489343696a92193168315dc9f"
         }
       ]
     },
